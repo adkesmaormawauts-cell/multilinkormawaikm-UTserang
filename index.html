@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multilink Ormawa IKM UT Serang</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden; /* Mencegah scroll horizontal saat sidebar buka */
+        }
+
+        /* --- STYLES SIDEBAR BARU --- */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            background-color: #0000ff;
+            overflow-x: hidden;
+            transition: 0.4s;
+            padding-top: 60px;
+        }
+
+        .sidebar a {
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            color: #ffff00;
+            display: block;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar .closebtn {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 36px;
+            color: #ffff00;
+            cursor: pointer;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1500;
+        }
+
+        /* Header */
+        header {
+            background-color: #ffff00;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 5px solid #0000ff;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            margin-right: 15px;
+            cursor: pointer;
+            color: #0000ff; /* Sesuai warna aksen */
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            border-radius : 50%;
+        }
+
+        .header-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        /* Container Content */
+        .content-wrapper {
+            flex: 1; 
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            color: #0000ff;
+            font-size: 2rem;
+            font-weight: 900;
+            border-left: 5px solid #ffff00;
+            padding-left: 10px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .description {
+            font-size: 1rem;
+            text-align: justify;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        /* Buttons Area */
+        .button-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            padding: 15px 25px;
+            border-radius: 20px;
+            font-weight: 900;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn i {
+            font-size: 2.5rem;
+            margin-right: 20px;
+        }
+
+        .btn-blue { background-color: #0000ff; color: #ffffff; }
+        .btn-yellow { background-color: #ffff00; color: #0000ff; }
+        .btn-outline { background-color: #ffffff; color: #0000ff; border: 2px solid #333; }
+
+        /* Footer */
+        footer {
+            background-color: #ffff00;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 5px solid #0000ff; 
+            margin-top: 40px;
+        }
+
+        .footer-logo {
+            width: 100px;
+            margin-bottom: 10px;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            color: #0000ff; 
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: #0000ff; 
+            font-size: 1.4rem;
+            transition: opacity 0.2s;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mySidebar" class="sidebar">
+        <div class="closebtn" onclick="closeNav()">&times;</div>
+        <a href="#" onclick="closeNav()">Tentang Kami</a>
+        <a href="https://myut.ut.ac.id/auth/login/v2">My UT</a>
+        <a href="https://elearning.ut.ac.id/my/">Tuton</a>
+        <a href="https://pustaka.ut.ac.id/lib/">Pustaka Digital</a>
+    </div>
+
+    <div id="mainOverlay" class="overlay" onclick="closeNav()"></div>
+
+    <header>
+        <div class="menu-icon" onclick="openNav()"><i class="fas fa-bars"></i></div>
+        <img src="https://i.ibb.co.com/2Y7SDChK/images-8.jpg" alt="Logo UT" class="logo">
+        <div class="header-title">
+            MULTILINK ORMAWA<br>"IKM" UT SERANG
+        </div>
+    </header>
+
+    <div class="content-wrapper">
+        <div class="container">
+            <h2 class="section-title">TENTANG KAMI</h2>
+            <p class="description">
+                " Departemen Advokasi dan Kesejahteraan Mahasiswa (ADKESMA) merupakan departemen yang bertanggung jawab terhadap Kesejahteraan Mahasiswa UT Serang dan yang menjadi jembatan aspirasi dari mahasiswa kepada pihak pengelola Kampus"
+            </p>
+
+            <div class="button-list">
+                <a href="https://myut.ut.ac.id/auth/login/v2" class="btn btn-blue">
+                    <i class="fas fa-desktop"></i>
+                    MY UT
+                </a>
+
+                <a href="https://www.ut.ac.id/tutorial-online/" class="btn btn-yellow">
+                    <i class="fas fa-laptop-code"></i>
+                    E-LEARNING / TUTON
+                </a>
+
+                <a href="https://pustaka.ut.ac.id/lib/" class="btn btn-outline">
+                    <i class="fas fa-university"></i>
+                    PUSTAKA VIRTUAL
+                </a>
+                <a href="https://aksi.ut.ac.id/wisuda/du" class="btn btn-outline">
+                    <i class="fas fa-university"></i>
+                    CEK WISUDA
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <img src="https://i.ibb.co.com/tpTQ4tcP/11872-11zon.png" alt="Logo UT" class="footer-logo">
+        <p class="footer-text">
+            © 2026 ADKESMA ORMAWA "IKM" UT SERANG<br>
+        </p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/ormawaikm.utserang?igsh=MWNhM2VnZWo4bjl3aQ==" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@ormawaikm.utserang?si=kdggbLyU8QwiHJeb" title="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.tiktok.com/@ormawaikm.utserang?_r=1&_t=ZS-95cRhus9AN2" title="tiktok"><i class="fab fa-tiktok"></i></a>
+            <a href="https://x.com/Ikm_utserang" title="twitter"><i class="fab fa-twitter"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+            document.getElementById("mainOverlay").style.display = "block";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("mainOverlay").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
